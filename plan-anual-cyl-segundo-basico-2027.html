@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Anual Interactivo 2027 — Comunicación y Lenguaje (Segundo Básico)</title>
+    <style>
+        :root {
+            --azul-institucional: #1F3C88;
+            --azul-secundario: #3F72AF;
+            --blanco: #FFFFFF;
+            --amarillo-institucional: #F2C94C;
+            --gris-fondo: #F4F6F9;
+            --texto-principal: #1E293B;
+            --texto-secundario: #475569;
+            --borde-suave: #DCE4F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--gris-fondo);
+            color: var(--texto-principal);
+            padding: 16px;
+        }
+
+        .dashboard-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background-color: var(--blanco);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(31, 60, 136, 0.14);
+            border: 2px solid var(--azul-secundario);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 88vh;
+        }
+
+        /* Barra superior institucional */
+        .top-bar {
+            background: linear-gradient(135deg, var(--azul-institucional) 0%, #162B66 100%);
+            color: var(--blanco);
+            padding: 18px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--amarillo-institucional);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo-cm {
+            height: 62px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .course-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .course-meta h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--blanco);
+            letter-spacing: 0.3px;
+        }
+
+        .meta-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .meta-pill {
+            background-color: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(242, 201, 76, 0.5);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--blanco);
+        }
+
+        .meta-pill span {
+            color: var(--amarillo-institucional);
+            font-weight: 600;
+        }
+
+        .btn-fullscreen {
+            background-color: var(--amarillo-institucional);
+            color: var(--azul-institucional);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-fullscreen:hover {
+            background-color: #f7d466;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Navegación por pestañas */
+        .tabs-nav {
+            display: flex;
+            background-color: var(--azul-secundario);
+            overflow-x: auto;
+            border-bottom: 3px solid var(--azul-institucional);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px 16px;
+            background-color: var(--azul-secundario);
+            color: var(--blanco);
+            border: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.18);
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .tab-btn:last-child {
+            border-right: none;
+        }
+
+        .tab-btn:hover {
+            background-color: #325e94;
+        }
+
+        .tab-btn.active {
+            background-color: var(--amarillo-institucional);
+            color: var(--azul-institucional);
+            font-weight: 700;
+            box-shadow: inset 0 -3px 0 var(--azul-institucional);
+        }
+
+        /* Área principal de contenido */
+        .content-area {
+            padding: 28px;
+            flex-grow: 1;
+            background-color: var(--blanco);
+            overflow-y: auto;
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            border-bottom: 2px solid var(--amarillo-institucional);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-header h2 {
+            color: var(--azul-institucional);
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .source-badge {
+            background-color: #EEF3FA;
+            color: var(--azul-institucional);
+            border: 1px solid var(--azul-secundario);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .proposal-badge {
+            background-color: #FEF9E7;
+            color: #7D6008;
+            border: 1px solid var(--amarillo-institucional);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Tarjetas */
+        .card {
+            background-color: var(--blanco);
+            border: 1px solid var(--borde-suave);
+            border-left: 5px solid var(--azul-institucional);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 8px rgba(31, 60, 136, 0.05);
+        }
+
+        .card.secondary-accent {
+            border-left-color: var(--azul-secundario);
+        }
+
+        .card.yellow-accent {
+            border-left-color: var(--amarillo-institucional);
+        }
+
+        .card h3 {
+            color: var(--azul-secundario);
+            font-size: 1.12rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .card p {
+            line-height: 1.65;
+            margin-bottom: 12px;
+            font-size: 0.98rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .clean-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .clean-list li {
+            padding: 10px 14px;
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 6px;
+            line-height: 1.55;
+            font-size: 0.96rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .bullet-dot {
+            min-width: 10px;
+            height: 10px;
+            background-color: var(--amarillo-institucional);
+            border: 2px solid var(--azul-institucional);
+            border-radius: 50%;
+            margin-top: 6px;
+        }
+
+        /* Cuadrícula de competencias y métodos */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .comp-item {
+            background-color: #F8FAFC;
+            border: 1px solid var(--borde-suave);
+            border-top: 3px solid var(--azul-secundario);
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+
+        .comp-title {
+            color: var(--azul-institucional);
+            font-weight: 700;
+            font-size: 0.98rem;
+            margin-bottom: 6px;
+        }
+
+        .comp-desc {
+            color: var(--texto-secundario);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        /* Acordeones y filtros para Unidades */
+        .unit-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .unit-filter-btn {
+            background-color: #EEF3FA;
+            color: var(--azul-institucional);
+            border: 1px solid var(--azul-secundario);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .unit-filter-btn:hover, .unit-filter-btn.active {
+            background-color: var(--azul-institucional);
+            color: var(--blanco);
+            border-color: var(--azul-institucional);
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 18px;
+        }
+
+        .unit-card {
+            background-color: var(--blanco);
+            border: 1px solid var(--borde-suave);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(31, 60, 136, 0.06);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .unit-card-header {
+            background-color: var(--azul-institucional);
+            color: var(--blanco);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--amarillo-institucional);
+        }
+
+        .unit-card-header h3 {
+            color: var(--blanco);
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .topic-count {
+            background-color: var(--amarillo-institucional);
+            color: var(--azul-institucional);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .unit-topics {
+            list-style: none;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .unit-topics li {
+            font-size: 0.92rem;
+            padding: 8px 10px;
+            background-color: #F8FAFC;
+            border-radius: 6px;
+            border-left: 3px solid var(--azul-secundario);
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .topic-num {
+            color: var(--azul-institucional);
+            font-weight: 700;
+            font-size: 0.82rem;
+            min-width: 22px;
+        }
+
+        /* Buscador en contenidos */
+        .search-box {
+            width: 100%;
+            max-width: 340px;
+            padding: 8px 14px;
+            border: 1px solid var(--azul-secundario);
+            border-radius: 6px;
+            font-size: 0.92rem;
+            color: var(--texto-principal);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--azul-institucional);
+            box-shadow: 0 0 0 3px rgba(63, 114, 175, 0.2);
+        }
+
+        /* Pie de página institucional */
+        .footer-bar {
+            background-color: #F8FAFC;
+            border-top: 1px solid var(--borde-suave);
+            padding: 12px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.84rem;
+            color: var(--texto-secundario);
+        }
+
+        .footer-motto {
+            color: var(--azul-institucional);
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .btn-fullscreen {
+                align-self: flex-start;
+            }
+            .content-area {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container" id="annualDashboard">
+    <!-- Barra superior institucional -->
+    <header class="top-bar">
+        <div class="brand-section">
+            <img src="https://admisiones.colegiomontano.edu.gt/assets/img/logo-cm-blanco.webp" alt="Logo Colegio Montano" class="logo-cm">
+            <div class="course-meta">
+                <h1>Plan Anual Interactivo — Comunicación y Lenguaje</h1>
+                <div class="meta-pills">
+                    <div class="meta-pill"><span>Curso:</span> Comunicación y Lenguaje</div>
+                    <div class="meta-pill"><span>Grado y Sección:</span> Segundo Básico (Sección no especificada en documento)</div>
+                    <div class="meta-pill"><span>Docente:</span> PEM Brenda Hidalgo de López</div>
+                    <div class="meta-pill"><span>Ciclo Escolar:</span> 2027</div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-fullscreen" onclick="toggleFullScreen()">Pantalla Completa</button>
+    </header>
+
+    <!-- Navegación horizontal por pestañas -->
+    <nav class="tabs-nav" role="tablist">
+        <button class="tab-btn active" onclick="openTab(event, 'tab-descriptor')">I) Descriptor</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-objetivos')">II) Objetivos</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-competencias')">III) Competencias</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-indicadores')">IV) Indicadores</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-metodos')">V) Métodos</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-bibliografia')">VI) Bibliografía</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-contenidos')">VII) Contenidos</button>
+    </nav>
+
+    <!-- Contenido de las pestañas -->
+    <main class="content-area">
+
+        <!-- I. DESCRIPTOR DEL CURSO -->
+        <section id="tab-descriptor" class="tab-panel active">
+            <div class="section-header">
+                <h2>I. Descriptor del Curso</h2>
+                <span class="source-badge">Información extraída del documento adjunto</span>
+            </div>
+            <div class="card">
+                <h3>Enfoque Curricular y Propósito Formativo</h3>
+                <p>El Área de Comunicación y Lenguaje ofrece continuidad al diseño curricular para el Nivel Primario; en este sentido, el enfoque es básicamente comunicacional, esto significa que se hace énfasis en el desarrollo de habilidades comunicativas tanto de expresión oral como de expresión escrita.</p>
+                <p>Contribuye a la consolidación de habilidades psicolingüísticas, expresivas y comunicacionales, fortalece habilidades para la lectura tanto en el campo de la comprensión lectora, el hábito y la velocidad, como en el campo del goce estético de la creación literaria. Todas ellas, se han venido tratando desde los niveles Preprimario y Primario.</p>
+                <p>Otra de sus finalidades estriba en posibilitar el acercamiento del alumnado a la variante formal del español o castellano así como ofrecer criterios conceptuales que le permitan apreciar y evidenciar la variedad idiomática del país.</p>
+            </div>
+        </section>
+
+        <!-- II. OBJETIVOS GENERALES -->
+        <section id="tab-objetivos" class="tab-panel">
+            <div class="section-header">
+                <h2>II. Objetivos Generales</h2>
+                <span class="source-badge">Información extraída del documento adjunto</span>
+            </div>
+            <div class="card">
+                <h3>Metas Generales del Aprendizaje</h3>
+                <ul class="clean-list">
+                    <li><span class="bullet-dot"></span><span>Expresar su opinión oral y de manera escrita utilizando los elementos que les proporciona el Idioma Español.</span></li>
+                    <li><span class="bullet-dot"></span><span>Redactar material literario aplicando las técnicas de redacción y ortográficas en todo escrito.</span></li>
+                    <li><span class="bullet-dot"></span><span>Leer comprensivamente cualquier escrito.</span></li>
+                    <li><span class="bullet-dot"></span><span>Comunicar sus ideas de una manera clara y fluida, utilizando los elementos de la comunicación y el lenguaje oral y escrito.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- III. COMPETENCIAS -->
+        <section id="tab-competencias" class="tab-panel">
+            <div class="section-header">
+                <h2>III. Competencias Académicas e Institucionales</h2>
+                <span class="source-badge">Extraído del documento + Competencias CM</span>
+            </div>
+
+            <div class="card">
+                <h3>Competencias Académicas del Área (Extraídas del documento)</h3>
+                <ul class="clean-list">
+                    <li><span class="bullet-dot"></span><span><i>Competencia 1:</i> En forma autónoma, participa en forma fluida y eficiente en diversas situaciones comunicativas, con un objetivo preciso, en forma clara, concisa, secuencial y coherente.</span></li>
+                    <li><span class="bullet-dot"></span><span><i>Competencia 2:</i> Practica con autonomía sus habilidades de entendimiento, comprensión e interpretación de lo que lee.</span></li>
+                    <li><span class="bullet-dot"></span><span><i>Competencia 3:</i> Redacta textos con autonomía, con claridad, concisión, sencillez, organización, cohesión, coherencia y adecuación, según el contexto y la intencionalidad.</span></li>
+                </ul>
+            </div>
+
+            <div class="card secondary-accent">
+                <h3>Competencias Blandas Declaradas en el Documento Adjunto</h3>
+                <div class="grid-2">
+                    <div class="comp-item">
+                        <div class="comp-title">Creatividad</div>
+                        <div class="comp-desc">Aspecto fundamental para crecer como persona y sociedad, teniendo en cuenta que la vida misma es constante movimiento y fluctuación.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Innovación</div>
+                        <div class="comp-desc">Supone crear cosas que puedan ser provechosas para el momento que vivimos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Pensamiento crítico</div>
+                        <div class="comp-desc">Permite reflexionar sobre aspectos nuevos o ya establecidos con el objetivo último de generar nuevas respuestas.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Resolución de problemas</div>
+                        <div class="comp-desc">Capacidad indispensable para transitar satisfactoriamente momentos de crisis que se dan en el día a día.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Trabajo en equipo</div>
+                        <div class="comp-desc">Modo de trabajo muy satisfactorio que favorece el desarrollo positivo de las relaciones humanas y del que se obtienen resultados muy provechosos al unir la fuerza de los diferentes potenciales humanos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Comunicación efectiva</div>
+                        <div class="comp-desc">La capacidad de transmitir de manera positiva, clara y respetuosa el mensaje junto con la capacidad de escucha activa y empatía favorece las relaciones personales y, con ello, la consecución de proyectos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Productividad</div>
+                        <div class="comp-desc">Que el resultado final del trabajo realizado suponga un producto útil y sea realizado de manera eficiente y efectiva.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Liderazgo</div>
+                        <div class="comp-desc">Facilita la organización y el desarrollo de grupos y proyectos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Responsabilidad</div>
+                        <div class="comp-desc">Habilidad necesaria para dar garantía de seriedad y rigurosidad en nuestro trabajo.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Inteligencia emocional</div>
+                        <div class="comp-desc">Capacidad que permite la autogestión emocional y con los demás de una manera saludable y respetuosa, favoreciendo relaciones pro-sociales.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card yellow-accent">
+                <h3>Competencias CM Institucionales Integradas</h3>
+                <div class="grid-2">
+                    <div class="comp-item">
+                        <div class="comp-title">Pensamiento crítico y resolución de problemas</div>
+                        <div class="comp-desc">Análisis riguroso de textos, argumentos y situaciones comunicativas para formular soluciones fundamentadas.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Colaboración y trabajo en equipo</div>
+                        <div class="comp-desc">Construcción conjunta de producciones orales, escritas y proyectos literarios con roles definidos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Competencias digitales</div>
+                        <div class="comp-desc">Lectura crítica de textos digitales y uso ético y efectivo de entornos virtuales para investigar y comunicar.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Comunicación efectiva</div>
+                        <div class="comp-desc">Expresión oral y escrita con claridad, adecuación, cohesión y escucha empática en contextos formales e informales.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Creatividad e innovación</div>
+                        <div class="comp-desc">Producción literaria, narrativa, poética y audiovisual original con enfoque expresivo propio.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Aprendizaje autónomo y adaptabilidad</div>
+                        <div class="comp-desc">Autorregulación en la lectura, autocorrección ortográfica y adaptación a distintos géneros discursivos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Conciencia global y cultural</div>
+                        <div class="comp-desc">Valoración de la diversidad idiomática de Guatemala, la literatura precolombina, latinoamericana y universal.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Ética y ciudadanía digital</div>
+                        <div class="comp-desc">Evaluación crítica de los medios de comunicación, estereotipos y veracidad de las fuentes en Internet.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Gestión emocional y resiliencia</div>
+                        <div class="comp-desc">Manejo asertivo de la expresión oral en público, debates y retroalimentación constructiva.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Conciencia ecológica y sostenibilidad</div>
+                        <div class="comp-desc">Reflexión crítica sobre el entorno social y natural presente en las obras literarias y textos argumentativos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Desempeño de roles de liderazgo</div>
+                        <div class="comp-desc">Conducción responsable de equipos de debate, plenarias, proyectos de investigación y exposiciones.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IV. INDICADORES DE LOGRO -->
+        <section id="tab-indicadores" class="tab-panel">
+            <div class="section-header">
+                <h2>IV. Indicadores de Logro</h2>
+                <span class="source-badge">Información extraída del documento adjunto</span>
+            </div>
+            <div class="card">
+                <h3>Indicadores de Logro del Área</h3>
+                <ul class="clean-list">
+                    <li><span class="bullet-dot"></span><span>Infiere el significado de la información y argumentos válidos o útiles, en distintos contextos orales en los que participa: informales y formales, coloquiales, publicitarios y científicos.</span></li>
+                    <li><span class="bullet-dot"></span><span>Controla la objetividad del mensaje que expone, controlando la adecuación, coherencia y cohesión, así como su propia opinión.</span></li>
+                    <li><span class="bullet-dot"></span><span>Aplica estrategias para tomar decisiones asertivas acerca de lo que escucha o dice.</span></li>
+                    <li><span class="bullet-dot"></span><span>Lee textos digitales con fluidez.</span></li>
+                    <li><span class="bullet-dot"></span><span><i>2.2</i> Utiliza sus habilidades de comprensión lectora en distintos textos, incluidos los digitales.</span></li>
+                    <li><span class="bullet-dot"></span><span><i>2.3</i> Lee con autonomía y placer especialmente obras literarias de autores de la literatura universal.</span></li>
+                    <li><span class="bullet-dot"></span><span><i>3.1</i> Escribe textos en forma autónoma, coherentes, cohesionados y adecuados, teniendo en cuenta las fases de la redacción.</span></li>
+                    <li><span class="bullet-dot"></span><span>Redacta textos gramaticalmente correctos.</span></li>
+                    <li><span class="bullet-dot"></span><span><i>3.3</i> Realiza en forma autónoma, las correcciones ortográficas para dar precisión y claridad a lo que redacta y publica.</span></li>
+                </ul>
+            </div>
+            <div class="card yellow-accent">
+                <h3>Nota sobre Criterios de Evaluación</h3>
+                <p>El documento adjunto detalla los nueve indicadores de logro anteriores sin incluir una tabla separada de ponderaciones o criterios específicos de calificación; dichos criterios se concretan en las rúbricas y listas de cotejo de cada plan diario.</p>
+            </div>
+        </section>
+
+        <!-- V. MÉTODOS DIDÁCTICOS -->
+        <section id="tab-metodos" class="tab-panel">
+            <div class="section-header">
+                <h2>V. Métodos Didácticos</h2>
+                <span class="source-badge">Documento adjunto + Modelo Período Doble CM</span>
+            </div>
+
+            <div class="card">
+                <h3>Ejes Metodológicos Declarados en el Documento</h3>
+                <div class="grid-2">
+                    <div class="comp-item">
+                        <div class="comp-title">Activo Colaborativo</div>
+                        <div class="comp-desc">El estudiante es protagonista activo de su aprendizaje mediante la interacción entre pares, el diálogo y la construcción compartida del conocimiento.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Mejora continua de la clase</div>
+                        <div class="comp-desc">Evaluación formativa constante, retroalimentación oportuna y ajuste pedagógico basado en las evidencias de desempeño del grupo.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Método constructivista</div>
+                        <div class="comp-desc">Articulación de los saberes previos con nuevos conceptos lingüísticos y literarios para lograr aprendizajes significativos y transferibles.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">Aprendizaje Basado en Proyectos (ABP)</div>
+                        <div class="comp-desc">Integración de lectura, análisis gramatical y producción oral o escrita en productos concretos como debates, crónicas, discursos, ensayos y manifiestos.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card secondary-accent">
+                <h3>Estructura Institucional del Período Doble (70 Minutos)</h3>
+                <div class="grid-2">
+                    <div class="comp-item">
+                        <div class="comp-title">1. Introducción Motivante (5 minutos)</div>
+                        <div class="comp-desc">Activación de presaberes mediante juegos lingüísticos, dinamización, preguntas detonantes y lluvia de ideas conectadas con la realidad del estudiante.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">2. Trabajo Individual (20 minutos)</div>
+                        <div class="comp-desc">Desarrollo de potencialidades, habilidades y destrezas individuales mediante lectura analítica, ejercicios gramaticales y producción propia.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">3. Trabajo en Equipo (30 minutos)</div>
+                        <div class="comp-desc">Interacción cooperativa con roles definidos bajo la consigna <i>todos para uno y uno para todos</i> para resolver problemas y elaborar productos concretos.</div>
+                    </div>
+                    <div class="comp-item">
+                        <div class="comp-title">4. Plenaria y Cierre (15 minutos)</div>
+                        <div class="comp-desc">Exposición pública de conclusiones, diálogo socrático, verificación de aprendizajes y vinculación con la lectura previa en casa.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VI. BIBLIOGRAFÍA -->
+        <section id="tab-bibliografia" class="tab-panel">
+            <div class="section-header">
+                <h2>VI. Bibliografía</h2>
+                <span class="source-badge">Información extraída del documento adjunto</span>
+            </div>
+            <div class="card">
+                <h3>Texto Base y Referencia Curricular</h3>
+                <ul class="clean-list">
+                    <li><span class="bullet-dot"></span><span><i>Texto base:</i> Comunicación y Lenguaje, Proyecto Saber 9 — Editorial Santillana.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- VII. CONTENIDOS -->
+        <section id="tab-contenidos" class="tab-panel">
+            <div class="section-header">
+                <h2>VII. Contenidos Programáticos por Unidad (Ciclo 2027)</h2>
+                <input type="text" id="topicSearch" class="search-box" placeholder="Buscar tema en las 4 unidades..." onkeyup="filterTopics()">
+            </div>
+
+            <div class="unit-controls">
+                <button class="unit-filter-btn active" onclick="filterUnit('all', this)">Todas las Unidades (63 temas)</button>
+                <button class="unit-filter-btn" onclick="filterUnit('u1', this)">Unidad 1 (15 temas)</button>
+                <button class="unit-filter-btn" onclick="filterUnit('u2', this)">Unidad 2 (16 temas)</button>
+                <button class="unit-filter-btn" onclick="filterUnit('u3', this)">Unidad 3 (16 temas)</button>
+                <button class="unit-filter-btn" onclick="filterUnit('u4', this)">Unidad 4 (16 temas)</button>
+            </div>
+
+            <div class="units-grid" id="unitsContainer">
+                <!-- UNIDAD 1 -->
+                <article class="unit-card" data-unit="u1">
+                    <div class="unit-card-header">
+                        <h3>Unidad 1</h3>
+                        <span class="topic-count">15 contenidos</span>
+                    </div>
+                    <ul class="unit-topics">
+                        <li><span class="topic-num">1.</span><span>Evaluación diagnóstica</span></li>
+                        <li><span class="topic-num">2.</span><span>Sé leer El Popol Wuj</span></li>
+                        <li><span class="topic-num">3.</span><span>Literatura precolombina</span></li>
+                        <li><span class="topic-num">4.</span><span>Reglas generales de acentuación</span></li>
+                        <li><span class="topic-num">5.</span><span>Sé leer Comentarios reales</span></li>
+                        <li><span class="topic-num">6.</span><span>Literatura del descubrimiento, conquista y barroco</span></li>
+                        <li><span class="topic-num">7.</span><span>Oración compuesta</span></li>
+                        <li><span class="topic-num">8.</span><span>Coordinación (Gramática)</span></li>
+                        <li><span class="topic-num">9.</span><span>Cohesión textual</span></li>
+                        <li><span class="topic-num">10.</span><span>Abreviación de palabras</span></li>
+                        <li><span class="topic-num">11.</span><span>Sé expresar Un mito</span></li>
+                        <li><span class="topic-num">12.</span><span>Textos argumentativos</span></li>
+                        <li><span class="topic-num">13.</span><span>Manejo de la cámara (Lenguaje cinematográfico)</span></li>
+                        <li><span class="topic-num">14.</span><span>Medios de comunicación</span></li>
+                        <li><span class="topic-num">15.</span><span>Sé escuchar y escribir Un mito</span></li>
+                    </ul>
+                </article>
+
+                <!-- UNIDAD 2 -->
+                <article class="unit-card" data-unit="u2">
+                    <div class="unit-card-header">
+                        <h3>Unidad 2</h3>
+                        <span class="topic-count">16 contenidos</span>
+                    </div>
+                    <ul class="unit-topics">
+                        <li><span class="topic-num">1.</span><span>Evaluación diagnóstica</span></li>
+                        <li><span class="topic-num">2.</span><span>Sé leer María</span></li>
+                        <li><span class="topic-num">3.</span><span>Literatura del neoclasicismo y romanticismo en América</span></li>
+                        <li><span class="topic-num">4.</span><span>Sé leer Leconte de Lisle e Ideario político y estético</span></li>
+                        <li><span class="topic-num">5.</span><span>Modernismo latinoamericano</span></li>
+                        <li><span class="topic-num">6.</span><span>Subordinación</span></li>
+                        <li><span class="topic-num">7.</span><span>Yuxtaposición</span></li>
+                        <li><span class="topic-num">8.</span><span>Polisemia y homonimia</span></li>
+                        <li><span class="topic-num">9.</span><span>Ortografía acentual</span></li>
+                        <li><span class="topic-num">10.</span><span>Monólogo</span></li>
+                        <li><span class="topic-num">11.</span><span>Comprensión e interpretación textual: Texto periodístico</span></li>
+                        <li><span class="topic-num">12.</span><span>La crónica</span></li>
+                        <li><span class="topic-num">13.</span><span>Técnicas de estudio: Fuentes de información</span></li>
+                        <li><span class="topic-num">14.</span><span>Recolección de información</span></li>
+                        <li><span class="topic-num">15.</span><span>Comunicación en Internet</span></li>
+                        <li><span class="topic-num">16.</span><span>Poesía</span></li>
+                    </ul>
+                </article>
+
+                <!-- UNIDAD 3 -->
+                <article class="unit-card" data-unit="u3">
+                    <div class="unit-card-header">
+                        <h3>Unidad 3</h3>
+                        <span class="topic-count">16 contenidos</span>
+                    </div>
+                    <ul class="unit-topics">
+                        <li><span class="topic-num">1.</span><span>Evaluación diagnóstica</span></li>
+                        <li><span class="topic-num">2.</span><span>Sé leer Paisaje, Hija del viento, Test, Arte poético</span></li>
+                        <li><span class="topic-num">3.</span><span>Literatura de vanguardia</span></li>
+                        <li><span class="topic-num">4.</span><span>Sé leer Ojos de perro azul</span></li>
+                        <li><span class="topic-num">5.</span><span>Boom latinoamericano</span></li>
+                        <li><span class="topic-num">6.</span><span>Conectores discursivos</span></li>
+                        <li><span class="topic-num">7.</span><span>Oración compuesta</span></li>
+                        <li><span class="topic-num">8.</span><span>Coherencia</span></li>
+                        <li><span class="topic-num">9.</span><span>Uso de la g y j</span></li>
+                        <li><span class="topic-num">10.</span><span>Sé expresar Un discurso</span></li>
+                        <li><span class="topic-num">11.</span><span>Ensayo</span></li>
+                        <li><span class="topic-num">12.</span><span>El reportaje</span></li>
+                        <li><span class="topic-num">13.</span><span>Grafiti</span></li>
+                        <li><span class="topic-num">14.</span><span>Lengua</span></li>
+                        <li><span class="topic-num">15.</span><span>Influencia de los medios de comunicación</span></li>
+                        <li><span class="topic-num">16.</span><span>El cuento</span></li>
+                    </ul>
+                </article>
+
+                <!-- UNIDAD 4 -->
+                <article class="unit-card" data-unit="u4">
+                    <div class="unit-card-header">
+                        <h3>Unidad 4</h3>
+                        <span class="topic-count">16 contenidos</span>
+                    </div>
+                    <ul class="unit-topics">
+                        <li><span class="topic-num">1.</span><span>Sé leer Los detectives salvajes y Nosotras que nos queremos tanto</span></li>
+                        <li><span class="topic-num">2.</span><span>Literatura contemporánea</span></li>
+                        <li><span class="topic-num">3.</span><span>Sé leer Hagamos un trato, El libro de las preguntas, Bienaventurado el hombre, La más mujer del mundo, Gardel y yo</span></li>
+                        <li><span class="topic-num">4.</span><span>Teatro contemporáneo en América Latina</span></li>
+                        <li><span class="topic-num">5.</span><span>Narrativa y teatro del siglo XXI</span></li>
+                        <li><span class="topic-num">6.</span><span>Sustantivo</span></li>
+                        <li><span class="topic-num">7.</span><span>Sintagma</span></li>
+                        <li><span class="topic-num">8.</span><span>Escritura de textos</span></li>
+                        <li><span class="topic-num">9.</span><span>Signos de puntuación</span></li>
+                        <li><span class="topic-num">10.</span><span>Técnica de debate</span></li>
+                        <li><span class="topic-num">11.</span><span>Intertextualidad</span></li>
+                        <li><span class="topic-num">12.</span><span>Manifiesto literario</span></li>
+                        <li><span class="topic-num">13.</span><span>Organizadores de información</span></li>
+                        <li><span class="topic-num">14.</span><span>Textos académicos</span></li>
+                        <li><span class="topic-num">15.</span><span>Estereotipos en medios de comunicación</span></li>
+                        <li><span class="topic-num">16.</span><span>Biografía</span></li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de página institucional -->
+    <footer class="footer-bar">
+        <span>Colegio Montano Cortijo — Km. 19.5 Calzada Roosevelt 7-55 zona 1 Lo de Coy, Mixco</span>
+        <span class="footer-motto">Desarrollamos competencias para triunfar.</span>
+    </footer>
+</div>
+
+<script>
+    function openTab(evt, panelId) {
+        const panels = document.querySelectorAll('.tab-panel');
+        panels.forEach(panel => panel.classList.remove('active'));
+
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        document.getElementById(panelId).classList.add('active');
+        evt.currentTarget.classList.add('active');
+    }
+
+    function filterUnit(unitCode, btn) {
+        const filterButtons = document.querySelectorAll('.unit-filter-btn');
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cards = document.querySelectorAll('.unit-card');
+        cards.forEach(card => {
+            if (unitCode === 'all' || card.getAttribute('data-unit') === unitCode) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function filterTopics() {
+        const query = document.getElementById('topicSearch').value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.unit-card');
+
+        cards.forEach(card => {
+            const items = card.querySelectorAll('.unit-topics li');
+            let visibleCount = 0;
+
+            items.forEach(li => {
+                const text = li.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    li.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    li.style.display = 'none';
+                }
+            });
+
+            if (query === '') {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = visibleCount > 0 ? 'flex' : 'none';
+            }
+        });
+    }
+
+    function toggleFullScreen() {
+        const dashboard = document.getElementById('annualDashboard');
+        if (!document.fullscreenElement) {
+            if (dashboard.requestFullscreen) {
+                dashboard.requestFullscreen();
+            } else if (dashboard.webkitRequestFullscreen) {
+                dashboard.webkitRequestFullscreen();
+            } else if (dashboard.msRequestFullscreen) {
+                dashboard.msRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
